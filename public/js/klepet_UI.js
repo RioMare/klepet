@@ -140,9 +140,10 @@ function dodajSmeske(vhodnoBesedilo) {
 function dodajSliko(vhodnoBesedilo) {
   if(vhodnoBesedilo.match(/(https?:[^\s]+\S+\.jpg|png|gif)/gi)) {
     var dodajLink = vhodnoBesedilo.match(/(https?:[^\s]+\S+\.jpg|png|gif)/gi);
-    var stSlik = dodajLink.length;
-
-    vhodnoBesedilo = vhodnoBesedilo + ("<img src='" +dodajLink + "' width=200px style='margin-left:20px'/>");
+    var stSlik=dodajLink.length;
+    for(var i=0; i<stSlik; i++) {
+      vhodnoBesedilo = vhodnoBesedilo + ("<img src='" +dodajLink[i] + "' width=200px style='margin-left:20px'/>");
+    }
   }
   return vhodnoBesedilo;
 }
