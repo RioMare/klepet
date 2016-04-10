@@ -22,6 +22,17 @@ Klepet.prototype.procesirajUkaz = function(ukaz) {
   var sporocilo = false;
 
   switch(ukaz) {
+    case 'dregljaj':
+      besede.shift();
+      var dregljac = besede.join(' ');
+      if(dregljac.length>0) {
+        this.socket.emit('dregljaj', {vzdevek: dregljac});
+        sporocilo=("Dregljaj za "+ dregljac);
+      }
+      else {
+        sporocilo="Neznan ukaz";
+      }
+      break;
     case 'pridruzitev':
       besede.shift();
       var kanal = besede.join(' ');
