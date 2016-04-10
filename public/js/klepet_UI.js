@@ -1,11 +1,20 @@
 function divElementEnostavniTekst(sporocilo) {
   var jeSmesko = sporocilo.indexOf('http://sandbox.lavbic.net/teaching/OIS/gradivo/') > -1;
+<<<<<<< HEAD
   var slikca = sporocilo.match(/(https?:[^\s]+\S+\.jpg|png|gif)/gi);
   if (jeSmesko) {
     sporocilo = sporocilo.replace(/\</g, '&lt;').replace(/\>/g, '&gt;').replace('&lt;img', '<img').replace('png\' /&gt;', 'png\' />');
     return $('<div style="font-weight: bold"></div>').html(sporocilo);
   } else if(slikca) {
     return $('<div style="font-weight: bold"></div>').html(sporocilo);
+=======
+  var youtube = sporocilo.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/);
+  if (jeSmesko) {
+    sporocilo = sporocilo.replace(/\</g, '&lt;').replace(/\>/g, '&gt;').replace('&lt;img', '<img').replace('png\' /&gt;', 'png\' />');
+    return $('<div style="font-weight: bold"></div>').html(sporocilo);
+  } else if(youtube) {
+    return $('<div style="font-weight: bold;"></div>').html(sporocilo);
+>>>>>>> youtube
   } else {
       return $('<div style="font-weight: bold;"></div>').text(sporocilo);
   }
@@ -18,7 +27,11 @@ function divElementHtmlTekst(sporocilo) {
 function procesirajVnosUporabnika(klepetApp, socket) {
   var sporocilo = $('#poslji-sporocilo').val();
   sporocilo = dodajSmeske(sporocilo);
+<<<<<<< HEAD
   sporocilo = dodajSliko(sporocilo);
+=======
+  sporocilo = dodajYoutube(sporocilo);
+>>>>>>> youtube
   var sistemskoSporocilo;
 
   if (sporocilo.charAt(0) == '/') {
@@ -140,7 +153,6 @@ function dodajSmeske(vhodnoBesedilo) {
   return vhodnoBesedilo;
 }
 
-
 function dodajSliko(vhodnoBesedilo) {
   if(vhodnoBesedilo.match(/(https?:[^\s]+\S+\.jpg|png|gif)/gi)) {
     var dodajLink = vhodnoBesedilo.match(/(https?:[^\s]+\S+\.jpg|png|gif)/gi);
@@ -149,5 +161,14 @@ function dodajSliko(vhodnoBesedilo) {
       vhodnoBesedilo = vhodnoBesedilo + ("<img src='" +dodajLink[i] + "' width=200px style='margin-left:20px'/>");
     }
   }
+
+
+function dodajYoutube(vhodnoBesedilo) {
+    var url = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var ujemanje = vhodnoBesedilo.match(url);
+    var id = ujemanje[2];
+    if (ujemanje&&id.length==11) {
+        vhodnoBesedilo = vhodnoBesedilo + ("<iframe width='200px' height='150px' style='margin-left:20px;' src='https://www.youtube.com/embed/" + id + "' allowfullscreen ></iframe>");
+    }
   return vhodnoBesedilo;
 }
