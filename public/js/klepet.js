@@ -57,7 +57,7 @@ Klepet.prototype.procesirajUkaz = function(ukaz) {
     default:
       sporocilo = 'Neznan ukaz.';
       break;
-  };
+  }
 
   return sporocilo;
 };
