@@ -168,7 +168,7 @@ function dodajSliko(vhodnoBesedilo) {
     }
   }
 
-
+//dela sam za en video 
 function dodajYoutube(vhodnoBesedilo) {
     var url = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     var ujemanje = vhodnoBesedilo.match(url);

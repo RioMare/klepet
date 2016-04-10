@@ -61,3 +61,5 @@ streznik.listen(process.env.PORT, function() {
 
 var klepetalnicaStreznik = require('./lib/klepetalnica_streznik');
 klepetalnicaStreznik.listen(streznik);
+
+
